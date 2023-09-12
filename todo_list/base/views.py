@@ -47,7 +47,7 @@ class TaskList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         # context['tasks'] is the full queryset
         context['tasks'] = context['tasks'].filter(user=self.request.user) # only show user specifc tasks
-        context['count'] = context['tasks'].filter(complete=False) # Count of incomplete items
+        context['count'] = context['tasks'].filter(complete=False).count() # Count of incomplete items
 
         # Search
         search_input = self.request.GET.get('search-area') or ''
